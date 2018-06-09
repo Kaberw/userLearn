@@ -1,0 +1,190 @@
+Linux文件目录：
+
+	[usr/share/man] -- 支持man page指令的文件
+	
+	[usr/share/info] -- 支持info指令的文件
+
+	[usr/share/doc] -- 软件说明文档目录
+	
+	[/etc/passwd] -- 账号与一般身份使用者记录文件
+	
+	[/etc/shadow] -- 个人密码记录文件
+	
+	[/etc/group] -- 组名记录文件
+	
+	[/etc/locale.conf] -- 系统配置文件(可修改系统语言)
+
+	
+Linux文件基本操作指令：
+	
+	ls -- 列出文件(不包括隐藏文件)
+	ls -a -- 列出所有文件(ls -l 按行)
+	ls -al -- 同上,按行列出当前目录所有文件项
+		dr-xr-x---.       5       root         root          4096      May 29 16:08       .
+		档案类型权限    链接数  档案拥有者   档案所属群组   档案大小(bytes)   最后被修改时间   档案名(带点为隐藏文件)
+		第一个字符代表这个文件是[目录、文件或是链接文件]：
+			d -- 目录
+			- -- 文件
+			l -- 链接档
+			b -- 装置文件里面的可供存储的接口设备
+			c -- 装置文件里面的串行端口设备
+		接下来字符，以三个一组(rwx--r代表可读、w代表可写、x代表可执行)分别为文件拥有者可具备权限、加入此群组账号可具备权限以及其
+		他账号所拥有的权限
+	ls -l --full--time -- 显示完整的修改时间格式
+	
+	
+	Linux文件权限的重要性：
+		~系统保护功能(某些系统文件不能轻易修改)
+		~团队开发软件或责数据共享功能
+	
+	改变文件属性与权限：
+			
+		[chmod] -- 变更文件权限，SUID，SGID，SBIT等等特性
+		[chown] -- 变更所有者
+		[chgrp] -- 变更组
+		
+		charge [-R] users dirname/filename -- 将文件所属组更改为users(必须存在，否则报错)  -R -- 递归次级目录
+		chown [-R] 账号名称  文件或目录
+		chown [-R] 账号名称:组名  文件或目录 -- 可将组名一起修改
+		
+		cp 来源文件 目标文件 -- 将来源文件向目标文件拷贝
+		
+		数字变更：
+		chmod [-R] xyz 文件或目录 -- (r:4 w:2 x:1) owner = rwx = 4+2+1 = 7 = x group = y others = z 变更为指定权限
+		符号变更：
+		chmod [u(user)/g(group)/o(other)/a(all)] [+(加入)/-(除去)/=(设定)] 文件或目录
+			chmod u=rwx,go=rx .bashrc -- 按照指定设置
+			chmod a+w .bashrc -- 其他保持原有，仅将所有加上w权限
+			chmod a-x .bashrc
+			
+		权限对文件重要性：
+			r(read):可读取此一文件的实际内容，如读取文本文件的文字内容等
+ 			w(write):可以编辑、新增或者是修改该文件的内容(但不含删除该文件)
+ 			x(execute):该文件具有可以被系统执行的权限(文件能否被执行由此决定，不像windows由扩展名)
+
+		权限对目录重要性：(目录主要的内容在记录文件名列表，文件名与目录有强烈关联)
+			r(read contents in directory):具有读取目录结构列表的权限,即可查询该目录下的文件名数据(ls有关命令可使用)
+			w(modify contents of directory):具有异动该目录结构列表的权限
+				建立新的文件与目录
+				删除已经存在的文件与目录(不论该文件的权限为何)
+				将已存在的文件或目录进行更名
+				搬移该目录内的文件、目录位置
+			x(access directory):代表用户是否能够进入该目录成为工作目录(能否执行cd指令)
+			
+			cd tmp -- 变换到tmp目录			
+			mkdir testing -- 创建testing目录
+			touch testing/testing -- 创建空文件在testing目录下名字为testing
+			rm testing/testing -- 删除文件testing
+			
+		文件类型：
+			正规文件
+				cat ~/.bashrc -- 读取纯文本文件内容
+				二进制文件 -- 可执行文件
+				last dataFile -- 读取数据格式文件	
+			目录
+			链接档 -- 类型windows系统的快捷方式
+			设备与装置文件
+				区块设备档 -- 存储数据(提供随机存取，软盘与硬盘)[b]
+				字符设备文件 -- 串行端口设备(鼠标，键盘)[c]
+			资料接口文件(sockets)
+				数据接口文件，网络数据承接[s]
+			数据输送文件(FIFO,pipe)
+				FIFO解决多个程序同时存取一个文件所造成的错误[p]
+				
+		文件扩展名：
+			*.sh -- 脚本或批处理文件，用shell写的
+			*Z,*.tar,*.tar.gz,*.zip,*.tgz -- 经过打包的压缩文件
+			*.html,*.php -- 网页相关文件，.html文件可使用网页浏览器直接开启，至于.php文件则可以透过client端的浏览器来sever端
+			浏览，以得到运算后的网页结果
+			
+		FHS目录：
+			                           可分享的(shareable)                      不可分享的(unshareable)
+			
+			不变的：(static)			/usr(软件放置处)							/etc(配置文件)
+										/opt(第三方协力文件)						/boot(开机与核心档)
+										
+			可变动的(variable)			/var/mail(使用者邮件信箱)					/var/run(程序相关)
+										/var/spool/news(新闻组)						/var/lock(程序相关)
+				
+		FHS定义的三层目录：
+			/(root，根目录)：与开机系统有关
+			/usr(unix software resource)：与软件安装/执行有关
+			/var(variable)：与系统运作过程有关
+				
+		/var/log -- 绝对路径
+		../var/log -- 相对路径
+		.或./ -- 当前目录
+		..或../ -- 上一层目录
+			
+		
+		uname -r -- 查看核心版本
+		uname -m -- 查看操作系统的位版本
+		yum install redhat-lsb -- 安装程序
+		lsb_release -a -- LSB(Linux Standard Base)FHS之外的标准
+				
+		
+		cd -- 变换目录
+		pwd -- 显示当前目录
+		mkdir -- 建立一个新的目录
+		rmdir -- 删除一个空的目录
+		
+		echo [$PATH] -- 显示环境变量(环境变量中先被查询的先执行)
+		mv /bin/ls /root -- 将ls移动至root目录中
+		
+		修改环境变量 -- PATH="${PATH}:/root"
+		
+		cp、rm、mv -- 复制、删除、移动
+		cp -a(所有)  -i(若目标文件已经存在，会先询问)  -p(连同文件属性一起复制)  -r(递归复制，复制目录)   -l(实体链接)  -s(符号链接)
+		
+		rm -f(忽略不存在文件)  -i(询问)  -r(递归删除，用于目录)
+		rmdir -- 删除空目录
+		touch -- 建立空文件
+		
+		mv -f(忽略不存在文件)  -i(询问)  -u(若目标文件存在，且移动较新才会覆盖)  可用作rename
+		
+		basename /etc/sysconfig/network -- 取得档名 network
+		dirname /etc/sysconfig/network -- 取得目录名 /etc/sysconfig
+			
+		文件内容查阅：
+			cat -- 由第一行开始显示文件内容
+ 			tac -- 从最后一行开始显示，可以看出 tac 是 cat 的倒着写
+ 			nl -- 显示的时候，顺道输出行号
+ 			more -- 一页一页的显示文件内容
+ 			less -- 与 more 类似，但是比 more 更好的是，他可以往前翻页
+ 			head -- 只看头几行
+			tail -- 只看尾巴几行
+ 			od -- 以二进制的方式读取文件内容
+
+		cat -n(打印出行号，连同空白行也有行号)  -b(仅对非空白行列出行号)  -A(可列出特殊字符非空白)
+		
+		nl -- 可设置行号格式
+	
+		more 页面指令：
+			空格键 (space)：代表向下翻一页；
+ 			Enter ：代表向下翻『一行』；
+ 			/字符串 ：代表在这个显示的内容当中，向下搜寻『字符串』这个关键词；
+ 			:f ：立刻显示出文件名以及目前显示的行数；
+ 			q ：代表立刻离开 more ，不再显示该文件内容。
+ 			b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。
+
+		less 页面指令：
+			空格键 ：向下翻动一页；
+ 			[pagedown]：向下翻动一页；
+ 			[pageup] ：向上翻动一页；
+ 			/字符串 ：向下搜寻『字符串』的功能；
+ 			?字符串 ：向上搜寻『字符串』的功能；
+ 			n ：重复前一个搜寻 (与 / 或 ? 有关！)
+ 			N ：反向的重复前一个搜寻 (与 / 或 ? 有关！)
+			g ：前进到这个资料的第一行去；
+ 			G ：前进到这个数据的最后一行去 (注意大小写)；
+ 			q ：离开 less 这个程序；
+
+		head -n -- 后面接数字代表显示前面多少行  接的为负数则代表不显示后面多少行
+		tail -n -- 显示后面多少行   -f -- 表示持续侦测
+
+		head -n 20 /etc/man_db.conf | tail -n 10 -- 显示第11到20行   | -- 前面的指令所输出的讯息，请透过管线交由后续的指令继续使用
+		
+		od -t oCc /etc/issue -- 将文件的内容以8进位列出储存值与ASCII的对照表
+
+		echo password | od -t oCc -- 将password这几个字的ASCII对照
+
