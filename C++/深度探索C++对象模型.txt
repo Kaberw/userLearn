@@ -1,45 +1,91 @@
-虚函数实现机制：虚函数表和虚表指针
+第一章 --- 关于对象
 
+	C++对象模型：
+		1、非静态成员被置于类对象之内,静态成员则被放到个别类对象之外;
+		2、静态和非静态函数也被放在个别类对象之外;
+		3、虚数则由两个步骤支持：
+			--- 虚函数表(每个class产生的一堆虚函数指针,存在虚函数表中,其中每个类关联的type_info object[用来支持RTTI]也放在该表格第一个地址中);
+			--- 每个类对象被安插一个指针,指向虚函数表,称作虚表指针(虚表指针的设定和重置由构造函数、析构函数和拷贝运算符重载函数自动完成)。
 
-子类对象传递给父类的引用或是指针时才能保存原有子类的地址，才能实现多态。否则会被切割掉，调用父类函数。
-
-
-当设计者显式定义了一个copy constructor时，如果一个class object以另一个相同class实体作为初值时，会调用其copy constructor函数。
-
-
-Bitwise Copy Semantics(位逐次拷贝)
-
-	--- 当设计者没有显式定义一个copy constructor时，如果一个class object以另一个相同class实体作为初始值
-	--- 其内部采用的是默认逐个成员拷贝初始化即把内建的或是派生的data(指针或是数目组)的值逐个拷贝到另一个实体
-	--- 但是它不会拷贝其中的member object，而是以递归的方式实行类内逐个成员拷贝
-
-  
-非Bitwise Copy Semantics(位逐次拷贝)--会构造默认拷贝函数
-
-	1.当class内含有一个member object而后者含有一个copy constructor时(显式声明的或是编译器合成的)
-	2.当class继承自一个base class而厚泽存在一个copy constructor时(显式声明的或是编译器合成的)
-	3.当class声明一个或多个virtual function时
-	4.当class派生自一个继承串链，其中有一个或多个virtual base classes。
-	
-	--- 前两种操作编译器需将member或是base class的copy constructor调用操作安插到合成的copy constructor中
-	--- 3则是需要合成一个copy constructor以求能够将vptr(虚表指针)适当的初始化
-	--- 主要在于当一个base class object以其derived class的object内容做初始化操作时，其vptr复制操作也必须保证安全。(此时不能简单复制)
-	eg::
-		Bear yogi;
-		Bear winnie = yogi;(直接拷贝，安全)
+	关于继承：(C++支持单一继承,也支持多继承。继承关系也可以指定为虚拟的)
+		--- 在虚拟继承的情况下,基类不管在派生链中被派生多少次都永远只有一个实例存在;
+		--- C++最初采用的继承模型中基类的数据成员直接被放置在派生类中;
+		--- 后来引入了虚继承,虚继承的原始模型是在类对象中为每一个有关联的虚基类加上一个指针。
 		
-		ZooAnimal franny = yogi;(发生了切割，不能直接拷贝，需合成copy constructor使franny的vptr指向ZooAnimal的virtual table)
- 
-	--- 4则每一个编译器对于虚拟继承的支持，都表示必须让"derived class object中virtual base class subobject位置"在执行期间准备妥当
-	--- 维护位置的完整性是编译器的职责。故需合成的copy constructor。
-	eg::
-		Raccoon rocky;
-		Raccoon little_critter = rocky;(直接拷贝，安全)
+	struct：
+		--- C++中处于同一访问区段(private、protected、public)的数据,保证以其声明顺序出现在内存中;然后不同区段则不能保证;
+		--- 同理,base class 的数据成员和派生类数据成员也没有先后之分,包括虚函数等;
+		--- 把C++和C中struct结合在一起唯一可行的方法是采用组合而非继承。
+			
+	C++程序设计模型：
+		--- 程序模型
+		--- 抽象数据类型模型(ADT)(程序处理的是单一的实例,编译期就确定了的)(OB)
+		--- 面向对象模型(OO)(多态等)(程序处理的是一个未知实例,只能通过引用或指针操作才行)(多态只存在于public class体系中)
+			*** Nonpublic的派生行为以及void*的指针也可以说是多态的,但需要显式转换操作处理,不是良好的多态
+			
+	C++以下列方式支持多态：
+		--- 一组隐式的转化操作: shape *ps = new Circle();
+		--- 虚函数
+		--- dynamic_cast 和 typeid运算符
+		
+	一个class object内存布局：
+		--- 其非静态数据成员的总和大小
+		--- 对齐机制填补的空间
+		--- 支持virtual产生的额外空间
+		
+	指针类型：
+		--- "指向不同类型的各指针"间的差异,既不在其内存表示,也不在其内容(地址),而在于其寻址出来的object类型不同;故void*的指针只能持有地址,而无法操作object
+		--- 加上继承后(ZooAnimal->Bear):pb所涵盖的地址包括整个Bear object,而pz只涵盖Bear object中ZooAnimal subobject。
+		--- 所以除了ZooAnimal subobject中出现的成员,我们不能够使用pz直接处理Bear的任何member(显式转换后可以),唯一例外是通过virtual机制。
+			Bear b;
+			ZooAnimal *pz =  &b;
+			Bear *pb = &b;
+			
+		--- 一个指针或是引用之所以支持多态,是因为他们并不引发内存中任何"与类型有关的内存委托操作",会改变的只有它们所指向的内存的"大小和内容解释方式"。
+		--- 而将一个普通对象给另一个对象(基类),则会溢出它所配置的内存,所以会产生切割,派生类的信息也就不会存在。
 	
-		//简单的bitwise copy不够
-		//编译器必须明确将little_critte的virtual base class pointer/offset初始化
-		RedPanda little_red;
-		Raccon little_critte = little_red;
+	
+	--- 子类对象传递给父类的引用或是指针时才能保存原有子类的地址,才能实现多态。否则会被切割掉,调用父类函数。
+	
+	
+第二章 --- 构造函数语意学
+	
+	--- 当设计者显式定义了一个copy constructor时,如果一个class object以另一个相同class实体作为初值时,会调用其copy constructor函数。
+
+
+	Bitwise Copy Semantics(位逐次拷贝)
+
+		--- 当设计者没有显式定义一个copy constructor时,如果一个class object以另一个相同class实体作为初始值
+		--- 其内部采用的是默认逐个成员拷贝初始化即把内建的或是派生的data(指针或是数目组)的值逐个拷贝到另一个实体
+		--- 但是它不会拷贝其中的member object,而是以递归的方式实行类内逐个成员拷贝
+
+	  
+	非Bitwise Copy Semantics(位逐次拷贝)--会构造默认拷贝函数
+
+		1.当class内含有一个member object而后者含有一个copy constructor时(显式声明的或是编译器合成的)
+		2.当class继承自一个base class而厚泽存在一个copy constructor时(显式声明的或是编译器合成的)
+		3.当class声明一个或多个virtual function时
+		4.当class派生自一个继承串链，其中有一个或多个virtual base classes。
+		
+		--- 前两种操作编译器需将member或是base class的copy constructor调用操作安插到合成的copy constructor中
+		--- 3则是需要合成一个copy constructor以求能够将vptr(虚表指针)适当的初始化
+		--- 主要在于当一个base class object以其derived class的object内容做初始化操作时，其vptr复制操作也必须保证安全。(此时不能简单复制)
+		eg::
+			Bear yogi;
+			Bear winnie = yogi;(直接拷贝，安全)
+			
+			ZooAnimal franny = yogi;(发生了切割，不能直接拷贝，需合成copy constructor使franny的vptr指向ZooAnimal的virtual table)
+	 
+		--- 4则每一个编译器对于虚拟继承的支持,都表示必须让"derived class object中virtual base class subobject位置"在执行期间准备妥当
+		--- 维护位置的完整性是编译器的职责。故需合成的copy constructor。
+		eg::
+			Raccoon rocky;
+			Raccoon little_critter = rocky;(直接拷贝，安全)
+		
+			//简单的bitwise copy不够
+			//编译器必须明确将little_critte的virtual base class pointer/offset初始化
+			RedPanda little_red;
+			Raccon little_critte = little_red;
 	
  
 	
