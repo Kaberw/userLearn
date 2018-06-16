@@ -49,43 +49,67 @@
 	
 	
 第二章 --- 构造函数语意学
-	
-	--- 当设计者显式定义了一个copy constructor时,如果一个class object以另一个相同class实体作为初值时,会调用其copy constructor函数。
 
+	编译器必须合成拷贝构造函数情况：
+		--- 类中含有带默认构造函数的类成员对象
+		--- 类派生自带有默认构造函数的基类
+		--- 类中含有虚函数
+		--- 类虚派生自某个基类
+		
+	常见误解：
+		--- 任何class如果未定义默认构造函数,就会被合成出来一个  //错误
+		--- 编译器合成出来的默认构造函数,会显式设定类中每个data member的默认值  //错误
+	
+	
+	拷贝构造函数调用：
+		当设计者显式定义了一个copy constructor时,如果一个class object以另一个相同class实体作为初值时,会调用其copy constructor函数。
+			--- 显式的以一个object的内容作为另一个class object的初值  //X xx = x;
+			--- object被当做参数交给某个函数时  //void foo(X x)
+			--- 函数传回一个class object时  //X foo_bar()			
 
 	Bitwise Copy Semantics(位逐次拷贝)
-
 		--- 当设计者没有显式定义一个copy constructor时,如果一个class object以另一个相同class实体作为初始值
 		--- 其内部采用的是默认逐个成员拷贝初始化即把内建的或是派生的data(指针或是数目组)的值逐个拷贝到另一个实体
 		--- 但是它不会拷贝其中的member object,而是以递归的方式实行类内逐个成员拷贝
-
+			eg::
+				class String{
+					public:
+						//...
+					private:
+						char *str;
+						int len;
+				};
+				String noun("book");
+				String verb = noun;				
+				//实际操作
+				verb.str = noun.str;
+				verb.len = noun.len;
 	  
 	非Bitwise Copy Semantics(位逐次拷贝)--会构造默认拷贝函数
-
 		1.当class内含有一个member object而后者含有一个copy constructor时(显式声明的或是编译器合成的)
-		2.当class继承自一个base class而厚泽存在一个copy constructor时(显式声明的或是编译器合成的)
+		2.当class继承自一个base class而后者存在一个copy constructor时(显式声明的或是编译器合成的)
 		3.当class声明一个或多个virtual function时
 		4.当class派生自一个继承串链，其中有一个或多个virtual base classes。
 		
 		--- 前两种操作编译器需将member或是base class的copy constructor调用操作安插到合成的copy constructor中
 		--- 3则是需要合成一个copy constructor以求能够将vptr(虚表指针)适当的初始化
 		--- 主要在于当一个base class object以其derived class的object内容做初始化操作时，其vptr复制操作也必须保证安全。(此时不能简单复制)
-		eg::
-			Bear yogi;
-			Bear winnie = yogi;(直接拷贝，安全)
-			
-			ZooAnimal franny = yogi;(发生了切割，不能直接拷贝，需合成copy constructor使franny的vptr指向ZooAnimal的virtual table)
-	 
+			eg::
+				class Bear:public ZooAnimal{...};
+				Bear yogi;
+				Bear winnie = yogi;(直接位逐次拷贝拷贝,安全)		
+				ZooAnimal franny = yogi;(发生了切割,不能直接拷贝,需合成copy constructor使franny的vptr指向ZooAnimal的virtual table)
+				
 		--- 4则每一个编译器对于虚拟继承的支持,都表示必须让"derived class object中virtual base class subobject位置"在执行期间准备妥当
 		--- 维护位置的完整性是编译器的职责。故需合成的copy constructor。
-		eg::
-			Raccoon rocky;
-			Raccoon little_critter = rocky;(直接拷贝，安全)
-		
-			//简单的bitwise copy不够
-			//编译器必须明确将little_critte的virtual base class pointer/offset初始化
-			RedPanda little_red;
-			Raccon little_critte = little_red;
+			eg::
+				Raccoon rocky;
+				Raccoon little_critter = rocky;(直接拷贝，安全)
+			
+				//简单的bitwise copy不够
+				//编译器必须明确将little_critte的virtual base class pointer/offset初始化
+				RedPanda little_red;
+				Raccon little_critte = little_red;
 	
  
 	
