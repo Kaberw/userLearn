@@ -1,336 +1,309 @@
-ÈÏÊ¶ºÍÑ§Ï°Bash£º
+è®¤è¯†å’Œå­¦ä¹ Bashï¼š
 
-	¼ÆËã»ú¹¤×÷Èý²¿Çú£º
-		1. Ó²¼þ£ºµ±È»¾ÍÊÇÐèÒªÄãµÄÓ²¼þÓÐ¡ºÉù¿¨Ð¾Æ¬¡»Õâ¸öÅä±¸£¬·ñÔòÔõÃ´»áÓÐÉùÒô£»
-		2. ºËÐÄ¹ÜÀí£º²Ù×÷ÏµÍ³µÄºËÐÄ¿ÉÒÔÖ§³ÖÕâ¸öÐ¾Æ¬×é,µ±È»»¹ÐèÒªÌá¹©Ð¾Æ¬µÄÇý¶¯³ÌÐò†ª£»
-		3. Ó¦ÓÃ³ÌÐò£ºÐèÒªÊ¹ÓÃÕß (¾ÍÊÇÄã) ÊäÈë·¢ÉúÉùÒôµÄÖ¸Áî†ª¡£
+	è®¡ç®—æœºå·¥ä½œä¸‰éƒ¨æ›²ï¼š
+		1. ç¡¬ä»¶ï¼šå½“ç„¶å°±æ˜¯éœ€è¦ä½ çš„ç¡¬ä»¶æœ‰ã€Žå£°å¡èŠ¯ç‰‡ã€è¿™ä¸ªé…å¤‡ï¼Œå¦åˆ™æ€Žä¹ˆä¼šæœ‰å£°éŸ³ï¼›
+		2. æ ¸å¿ƒç®¡ç†ï¼šæ“ä½œç³»ç»Ÿçš„æ ¸å¿ƒå¯ä»¥æ”¯æŒè¿™ä¸ªèŠ¯ç‰‡ç»„,å½“ç„¶è¿˜éœ€è¦æä¾›èŠ¯ç‰‡çš„é©±åŠ¨ç¨‹åºå•°ï¼›
+		3. åº”ç”¨ç¨‹åºï¼šéœ€è¦ä½¿ç”¨è€… (å°±æ˜¯ä½ ) è¾“å…¥å‘ç”Ÿå£°éŸ³çš„æŒ‡ä»¤å•°ã€‚
 		
-	Bash Shell¹¦ÄÜ£º
-		ÃüÁî±àÐÞÄÜÁ¦ (history)£º([ÉÏÏÂ¼ü] ¼ÇÒäÊ¹ÓÃ¹ýµÄÖ¸Áî  Î»ÓÚ¼ÒÄ¿Â¼µÄ.bash_historyÎÄ¼þÖÐ)
-		ÃüÁîÓëÎÄ¼þ²¹È«¹¦ÄÜ£º([tab] °´¼üµÄºÃ´¦)
-		ÃüÁî±ðÃûÉè¶¨¹¦ÄÜ£º(alias)
-		¹¤×÷¿ØÖÆ¡¢Ç°¾°±³¾°¿ØÖÆ£º(job control, foreground, background)
-		Í¨Åä·û£º(Wildcard)
+	Bash ShellåŠŸèƒ½ï¼š
+		å‘½ä»¤ç¼–ä¿®èƒ½åŠ› (history)ï¼š([ä¸Šä¸‹é”®] è®°å¿†ä½¿ç”¨è¿‡çš„æŒ‡ä»¤  ä½äºŽå®¶ç›®å½•çš„.bash_historyæ–‡ä»¶ä¸­)
+		å‘½ä»¤ä¸Žæ–‡ä»¶è¡¥å…¨åŠŸèƒ½ï¼š([tab] æŒ‰é”®çš„å¥½å¤„)
+		å‘½ä»¤åˆ«åè®¾å®šåŠŸèƒ½ï¼š(alias)
+		å·¥ä½œæŽ§åˆ¶ã€å‰æ™¯èƒŒæ™¯æŽ§åˆ¶ï¼š(job control, foreground, background)
+		é€šé…ç¬¦ï¼š(Wildcard)
 
-	type [-tpa] name --- ²éÑ¯Ö¸ÁîÊÇ·ñÎªbashÄÚ½¨Ö¸Áî
-		: ²»¼ÓÈÎºÎÑ¡ÏîºÍ²ÎÊýÊ±£¬type»áÏÔÊ¾nameÊÇÍâ²¿Ö¸Áî»¹ÊÇbashÄÚ½¨Ö¸Áî
-		-t : file(±íÊ¾Íâ²¿Ö¸Áî)  alias(±íÊ¾Îª±ðÃûÉè¶¨µÄÃû³Æ)  builtin(±íÊ¾ÎªbashÄÚ½¨Ö¸Áî)
-		-p : ÎªÍâ²¿Ö¸ÁîÊ±»áÏÔÊ¾ÍêÕûÎÄ¼þÃû
-		-a : »áÓÉPATH±äÁ¿¶¨ÒåµÄÂ·¾¶ÖÐ½«ËùÓÐº¬nameµÄÖ¸Áî¶¼ÁÐ³öÀ´,°üº¬alias
+	type [-tpa] name --- æŸ¥è¯¢æŒ‡ä»¤æ˜¯å¦ä¸ºbashå†…å»ºæŒ‡ä»¤
+		: ä¸åŠ ä»»ä½•é€‰é¡¹å’Œå‚æ•°æ—¶ï¼Œtypeä¼šæ˜¾ç¤ºnameæ˜¯å¤–éƒ¨æŒ‡ä»¤è¿˜æ˜¯bashå†…å»ºæŒ‡ä»¤
+		-t : file(è¡¨ç¤ºå¤–éƒ¨æŒ‡ä»¤)  alias(è¡¨ç¤ºä¸ºåˆ«åè®¾å®šçš„åç§°)  builtin(è¡¨ç¤ºä¸ºbashå†…å»ºæŒ‡ä»¤)
+		-p : ä¸ºå¤–éƒ¨æŒ‡ä»¤æ—¶ä¼šæ˜¾ç¤ºå®Œæ•´æ–‡ä»¶å
+		-a : ä¼šç”±PATHå˜é‡å®šä¹‰çš„è·¯å¾„ä¸­å°†æ‰€æœ‰å«nameçš„æŒ‡ä»¤éƒ½åˆ—å‡ºæ¥,åŒ…å«alias
 	
-	\[Enter] : ÌøÍÑ,ÔÚÏÂÒ»ÐÐ¼ÌÐøÊäÈë
+	\[Enter] : è·³è„±,åœ¨ä¸‹ä¸€è¡Œç»§ç»­è¾“å…¥
 	
-	[ctrl]+u/[ctrl]+k : ´Ó¹â±ê´¦ÏòÇ°»òÏòºóÉ¾³ýÖ¸Áî´®
-	[ctrl]+a/[ctrl]+e : ÈÃ¹â±êÒÆ¶¯µ½Õû¸öÖ¸Áî´®×îÇ°Ãæ»ò×îºóÃæ
+	[ctrl]+u/[ctrl]+k : ä»Žå…‰æ ‡å¤„å‘å‰æˆ–å‘åŽåˆ é™¤æŒ‡ä»¤ä¸²
+	[ctrl]+a/[ctrl]+e : è®©å…‰æ ‡ç§»åŠ¨åˆ°æ•´ä¸ªæŒ‡ä»¤ä¸²æœ€å‰é¢æˆ–æœ€åŽé¢
 
 
-±äÁ¿¹¦ÄÜ
+å˜é‡åŠŸèƒ½
 		
-	echo : ±äÁ¿µÄÈ¡ÓÃ echo $variable == echo ${variable}
+	echo : å˜é‡çš„å–ç”¨ echo $variable == echo ${variable}
 	
-	ÉèÖÃ±äÁ¿ £º myname = wukx    echo ${myname} ===> Êä³öwukx
+	è®¾ç½®å˜é‡ ï¼š myname = wukx    echo ${myname} ===> è¾“å‡ºwukx
 	
-	±äÁ¿µÄÉè¶¨¹æÔò£º
-		1. ±äÁ¿Óë±äÁ¿ÄÚÈÝÒÔÒ»¸öµÈºÅ¡º=¡»À´Á¬½á
-		2. µÈºÅÁ½±ß²»ÄÜÖ±½Ó½Ó¿Õ¸ñ·û
-		3. ±äÁ¿Ãû³ÆÖ»ÄÜÊÇÓ¢ÎÄ×ÖÄ¸ÓëÊý×Ö£¬µ«ÊÇ¿ªÍ·×Ö·û²»ÄÜÊÇÊý×Ö
-		4. ±äÁ¿ÄÚÈÝÈôÓÐ¿Õ¸ñ·û¿ÉÊ¹ÓÃË«ÒýºÅ¡º"¡»»òµ¥ÒýºÅ¡º'¡»½«±äÁ¿ÄÚÈÝ½áºÏÆðÀ´
-			Ë«ÒýºÅÄÚµÄÌØÊâ×Ö·ûÈç $ µÈ£¬¿ÉÒÔ±£ÓÐÔ­±¾µÄÌØÐÔ  ===>"$LANG" -> Êä³ö"zh_TW.UTF-8"
-			µ¥ÒýºÅÄÚµÄÌØÊâ×Ö·ûÔò½öÎªÒ»°ã×Ö·û (´¿ÎÄ±¾)  ===>'$LANG' -> Êä³ö"$LANG"
-		5. ¿ÉÓÃÌøÍÑ×Ö·û¡º\¡»½«ÌØÊâ·ûºÅ(Èç[Enter],$,\,¿Õ¸ñ·û,'µÈ)±ä³ÉÒ»°ã×Ö·û
-		6. ÔÚÒ»´®Ö¸ÁîµÄÖ´ÐÐÖÐ£¬»¹ÐèÒª½åÓÉÆäËû¶îÍâµÄÖ¸ÁîËùÌá¹©µÄÐÅÏ¢Ê±£¬¿ÉÒÔÊ¹ÓÃ·´µ¥ÒýºÅ¡º`Ö¸Áî`¡»»ò¡º$(Ö¸Áî)¡»
-			===> version=$(uname -r)¡»ÔÙ¡ºecho $version¡»¿ÉµÃ¡º3.10.0-229.el7.x86_64¡»
-		7. Èô¸Ã±äÁ¿ÎªÀ©Ôö±äÁ¿ÄÚÈÝÊ±£¬Ôò¿ÉÓÃ "$±äÁ¿Ãû³Æ" »ò ${±äÁ¿} ÀÛ¼ÓÄÚÈÝ
-		8. Èô¸Ã±äÁ¿ÐèÒªÔÚÆäËû×Ó³ÌÐòÖ´ÐÐ£¬ÔòÐèÒªÒÔ export À´Ê¹±äÁ¿±ä³É»·¾³±äÁ¿
-		9. Í¨³£´óÐ´×Ö·ûÎªÏµÍ³Ä¬ÈÏ±äÁ¿£¬×ÔÐÐÉè¶¨±äÁ¿¿ÉÒÔÊ¹ÓÃÐ¡Ð´×Ö·û£¬·½±ãÅÐ¶Ï
-		10. È¡Ïû±äÁ¿µÄ·½·¨ÎªÊ¹ÓÃ unset £º¡ºunset ±äÁ¿Ãû³Æ¡»
+	å˜é‡çš„è®¾å®šè§„åˆ™ï¼š
+		1. å˜é‡ä¸Žå˜é‡å†…å®¹ä»¥ä¸€ä¸ªç­‰å·ã€Ž=ã€æ¥è¿žç»“
+		2. ç­‰å·ä¸¤è¾¹ä¸èƒ½ç›´æŽ¥æŽ¥ç©ºæ ¼ç¬¦
+		3. å˜é‡åç§°åªèƒ½æ˜¯è‹±æ–‡å­—æ¯ä¸Žæ•°å­—ï¼Œä½†æ˜¯å¼€å¤´å­—ç¬¦ä¸èƒ½æ˜¯æ•°å­—
+		4. å˜é‡å†…å®¹è‹¥æœ‰ç©ºæ ¼ç¬¦å¯ä½¿ç”¨åŒå¼•å·ã€Ž"ã€æˆ–å•å¼•å·ã€Ž'ã€å°†å˜é‡å†…å®¹ç»“åˆèµ·æ¥
+			åŒå¼•å·å†…çš„ç‰¹æ®Šå­—ç¬¦å¦‚ $ ç­‰ï¼Œå¯ä»¥ä¿æœ‰åŽŸæœ¬çš„ç‰¹æ€§  ===>"$LANG" -> è¾“å‡º"zh_TW.UTF-8"
+			å•å¼•å·å†…çš„ç‰¹æ®Šå­—ç¬¦åˆ™ä»…ä¸ºä¸€èˆ¬å­—ç¬¦ (çº¯æ–‡æœ¬)  ===>'$LANG' -> è¾“å‡º"$LANG"
+		5. å¯ç”¨è·³è„±å­—ç¬¦ã€Ž\ã€å°†ç‰¹æ®Šç¬¦å·(å¦‚[Enter],$,\,ç©ºæ ¼ç¬¦,'ç­‰)å˜æˆä¸€èˆ¬å­—ç¬¦
+		6. åœ¨ä¸€ä¸²æŒ‡ä»¤çš„æ‰§è¡Œä¸­ï¼Œè¿˜éœ€è¦è—‰ç”±å…¶ä»–é¢å¤–çš„æŒ‡ä»¤æ‰€æä¾›çš„ä¿¡æ¯æ—¶ï¼Œå¯ä»¥ä½¿ç”¨åå•å¼•å·ã€Ž`æŒ‡ä»¤`ã€æˆ–ã€Ž$(æŒ‡ä»¤)ã€
+			===> version=$(uname -r)ã€å†ã€Žecho $versionã€å¯å¾—ã€Ž3.10.0-229.el7.x86_64ã€
+		7. è‹¥è¯¥å˜é‡ä¸ºæ‰©å¢žå˜é‡å†…å®¹æ—¶ï¼Œåˆ™å¯ç”¨ "$å˜é‡åç§°" æˆ– ${å˜é‡} ç´¯åŠ å†…å®¹
+		8. è‹¥è¯¥å˜é‡éœ€è¦åœ¨å…¶ä»–å­ç¨‹åºæ‰§è¡Œï¼Œåˆ™éœ€è¦ä»¥ export æ¥ä½¿å˜é‡å˜æˆçŽ¯å¢ƒå˜é‡
+		9. é€šå¸¸å¤§å†™å­—ç¬¦ä¸ºç³»ç»Ÿé»˜è®¤å˜é‡ï¼Œè‡ªè¡Œè®¾å®šå˜é‡å¯ä»¥ä½¿ç”¨å°å†™å­—ç¬¦ï¼Œæ–¹ä¾¿åˆ¤æ–­
+		10. å–æ¶ˆå˜é‡çš„æ–¹æ³•ä¸ºä½¿ç”¨ unset ï¼šã€Žunset å˜é‡åç§°ã€
 	
-	env : ÁÐ³öËùÓÐµÄ»·¾³±äÁ¿µÄÖµ¼°Æä±äÁ¿Öµ
+	env : åˆ—å‡ºæ‰€æœ‰çš„çŽ¯å¢ƒå˜é‡çš„å€¼åŠå…¶å˜é‡å€¼
 	
-	set : ¹Û²ìËùÓÐ±äÁ¿(º¬»·¾³±äÁ¿ºÍ×Ô¶¨Òå±äÁ¿)
-		PS1 : ÌáÊ¾×Ö·ûµÄÉè¶¨
-		$ : ¹ØÓÚshellµÄPID
-		£¿ £º ¹ØÓÚÉÏ¸öÖ´ÐÐÃüÁîµÄ»Ø´«Öµ(Ö´ÐÐ³É¹¦Îª0,²»³É¹¦ÔòÎª´íÎóÂë)
-		OSTYPE, HOSTTYPE, MACHTYPE : Ö÷»úÓ²¼þÓëºËÐÄµÈ¼¶
+	set : è§‚å¯Ÿæ‰€æœ‰å˜é‡(å«çŽ¯å¢ƒå˜é‡å’Œè‡ªå®šä¹‰å˜é‡)
+		PS1 : æç¤ºå­—ç¬¦çš„è®¾å®š
+		$ : å…³äºŽshellçš„PID
+		ï¼Ÿ ï¼š å…³äºŽä¸Šä¸ªæ‰§è¡Œå‘½ä»¤çš„å›žä¼ å€¼(æ‰§è¡ŒæˆåŠŸä¸º0,ä¸æˆåŠŸåˆ™ä¸ºé”™è¯¯ç )
+		OSTYPE, HOSTTYPE, MACHTYPE : ä¸»æœºç¡¬ä»¶ä¸Žæ ¸å¿ƒç­‰çº§
 		
-	×Ó½ø³Ì½ö»á¼Ì³Ð¸¸³ÌÐòµÄ»·¾³±äÁ¿,×Ó³ÌÐò²»»á¼Ì³Ð¸¸³ÌÐòµÄ×Ô¶¨Òå±äÁ¿
+	å­è¿›ç¨‹ä»…ä¼šç»§æ‰¿çˆ¶ç¨‹åºçš„çŽ¯å¢ƒå˜é‡,å­ç¨‹åºä¸ä¼šç»§æ‰¿çˆ¶ç¨‹åºçš„è‡ªå®šä¹‰å˜é‡
 	
-	export [±äÁ¿Ãû³Æ] --- ·ÖÏí×Ô¼ºµÄ±äÁ¿Éè¶¨¸øºóÀ´ºô½ÐµÄÎÄ¼þ»òÆäËû³ÌÐò ×Ô¶¨Òå±äÁ¿×ª»·¾³±äÁ¿
+	export [å˜é‡åç§°] --- åˆ†äº«è‡ªå·±çš„å˜é‡è®¾å®šç»™åŽæ¥å‘¼å«çš„æ–‡ä»¶æˆ–å…¶ä»–ç¨‹åº è‡ªå®šä¹‰å˜é‡è½¬çŽ¯å¢ƒå˜é‡
 	
-	locale -a --- ²éÑ¯ÓïÏµ
+	locale -a --- æŸ¥è¯¢è¯­ç³»
 	
-	/usr/lib/locale/ --- ÓïÏµÄ¿Â¼
-	/etc/locale.conf --- ÓïÏµÅäÖÃÎÄ¼þ
+	/usr/lib/locale/ --- è¯­ç³»ç›®å½•
+	/etc/locale.conf --- è¯­ç³»é…ç½®æ–‡ä»¶
 	
-	read [-pt] variable --- µÈ´ýÓÃ»§ÊäÈë
-		-p : ºóÃæ½ÓÌáÊ¾×Ö·û
-		-t : ºóÃæ½ÓµÈ´ýµÄÊ±¼ä(s)
+	read [-pt] variable --- ç­‰å¾…ç”¨æˆ·è¾“å…¥
+		-p : åŽé¢æŽ¥æç¤ºå­—ç¬¦
+		-t : åŽé¢æŽ¥ç­‰å¾…çš„æ—¶é—´(s)
 		
-	declare/typeset --- Ðû¸æ±äÁ¿ÀàÐÍ
+	declare/typeset --- å®£å‘Šå˜é‡ç±»åž‹
 	
-	--- Ä¬ÈÏÇé¿öÏÂ±äÁ¿Îª×Ö·û´®ÀàÐÍ
-	--- bashÖÐÊýÖµÔËËã×î¶àÄÜµ½´ïÕûÊýÐÎÌ¬
+	--- é»˜è®¤æƒ…å†µä¸‹å˜é‡ä¸ºå­—ç¬¦ä¸²ç±»åž‹
+	--- bashä¸­æ•°å€¼è¿ç®—æœ€å¤šèƒ½åˆ°è¾¾æ•´æ•°å½¢æ€
 	
-		declare £º 
-			-a : ½«ºóÃæ±äÁ¿¶¨ÒåÎªÊý×é
-			-i : ½«ºóÃæ±äÁ¿¶¨ÒåÎªÕûÊýÊý×Ö
-			-x : ÓëexportÒ»Ñù,½«±äÁ¿×ª»»³É»·¾³±äÁ¿ +x È¡Ïû¶¯×÷
-			-r : ½«±äÁ¿ÉèÖÃ³ÉreadonlyÀàÐÍ,²»ÄÜunset
-			-p : µ¥¶ÀÁÐ³ö±äÁ¿ÀàÐÍ
+		declare ï¼š 
+			-a : å°†åŽé¢å˜é‡å®šä¹‰ä¸ºæ•°ç»„
+			-i : å°†åŽé¢å˜é‡å®šä¹‰ä¸ºæ•´æ•°æ•°å­—
+			-x : ä¸Žexportä¸€æ ·,å°†å˜é‡è½¬æ¢æˆçŽ¯å¢ƒå˜é‡ +x å–æ¶ˆåŠ¨ä½œ
+			-r : å°†å˜é‡è®¾ç½®æˆreadonlyç±»åž‹,ä¸èƒ½unset
+			-p : å•ç‹¬åˆ—å‡ºå˜é‡ç±»åž‹
 		
-		var[index] = content --- ¶¨ÒåÊý×é
+		var[index] = content --- å®šä¹‰æ•°ç»„
 		
 	
-	ulimit --- ÓëÎÄ¼þÏµÍ³¼°³ÌÐòÏÞÖÆ¹ØÏµ
+	ulimit --- ä¸Žæ–‡ä»¶ç³»ç»ŸåŠç¨‹åºé™åˆ¶å…³ç³»
 	
 	
-	±äÁ¿ÐÞ¸Ä£º
+	å˜é‡ä¿®æ”¹ï¼š
 	
-		É¾³ý£º
-			echo ${path#/*:} -- ×Ö·ûÆ¥ÅäÉ¾³ý(#ÏòºóÉ¾³ý  %ÏòÇ°É¾³ý)
-				--- # % £º·ûºÏÈ¡´úÎÄ×ÖµÄ¡º×î¶ÌµÄ¡»ÄÇÒ»¸ö
-				--- ## %% £º·ûºÏÈ¡´úÎÄ×ÖµÄ¡º×î³¤µÄ¡»ÄÇÒ»¸ö
+		åˆ é™¤ï¼š
+			echo ${path#/*:} -- å­—ç¬¦åŒ¹é…åˆ é™¤(#å‘åŽåˆ é™¤  %å‘å‰åˆ é™¤)
+				--- # % ï¼šç¬¦åˆå–ä»£æ–‡å­—çš„ã€Žæœ€çŸ­çš„ã€é‚£ä¸€ä¸ª
+				--- ## %% ï¼šç¬¦åˆå–ä»£æ–‡å­—çš„ã€Žæœ€é•¿çš„ã€é‚£ä¸€ä¸ª
 	
-		È¡´ú£º
-			echo ${path/sbin/SBIN} --- ½«sbinÈ¡´úÎªSBIN
-				/ --- È¡´úÒ»´Î
-				//sbin/SBIN --- È«²¿È¡´ú
-	
-	
-	alias --- ¸øÃüÁîÉèÖÃ±ðÃû  alias rm='rm -i'
-	unalias --- È¡Ïû±ðÃû  unalias rm
+		å–ä»£ï¼š
+			echo ${path/sbin/SBIN} --- å°†sbinå–ä»£ä¸ºSBIN
+				/ --- å–ä»£ä¸€æ¬¡
+				//sbin/SBIN --- å…¨éƒ¨å–ä»£
 	
 	
-	ÃüÁî±ðÃûÓë±äÁ¿Çø±ð£ºÃüÁî±ðÃûÊÇ¿ÉÒÔÖ±½ÓÏÂ´ïµÄÖ¸Áî,¶ø±äÁ¿ÐèÒªÀàËÆechoÖ¸Áî²ÅÄÜ¹»ºô³ö±äÁ¿µÄÄÚÈÝ
+	alias --- ç»™å‘½ä»¤è®¾ç½®åˆ«å  alias rm='rm -i'
+	unalias --- å–æ¶ˆåˆ«å  unalias rm
 	
 	
-	history --- ²éÑ¯Ôø¾­ÏÂ´ï¹ýµÄÖ¸Áî
-		n : ÁÐ³ö×î½ün±ÊÃüÁî
-		c £º½«Ä¿Ç°shellÖÐËùÓÐhistoryÄÚÈÝÈ«²¿Ïû³ý
+	å‘½ä»¤åˆ«åä¸Žå˜é‡åŒºåˆ«ï¼šå‘½ä»¤åˆ«åæ˜¯å¯ä»¥ç›´æŽ¥ä¸‹è¾¾çš„æŒ‡ä»¤,è€Œå˜é‡éœ€è¦ç±»ä¼¼echoæŒ‡ä»¤æ‰èƒ½å¤Ÿå‘¼å‡ºå˜é‡çš„å†…å®¹
+	
+	
+	history --- æŸ¥è¯¢æ›¾ç»ä¸‹è¾¾è¿‡çš„æŒ‡ä»¤
+		n : åˆ—å‡ºæœ€è¿‘nç¬”å‘½ä»¤
+		c ï¼šå°†ç›®å‰shellä¸­æ‰€æœ‰historyå†…å®¹å…¨éƒ¨æ¶ˆé™¤
 		[-raw] histfile
-			a £º½«Ä¿Ç°ÐÂÔöµÄhistoryÖ¸ÁîÐÂÔöÈëhisfilesÖÐ,ÈôÃ»¼ÓÔòÔ¤ÉèÐ´Èë~/.bash_history
-			r : ½«histfilesµÄÄÚÈÝ¶Áµ½Ä¿Ç°Õâ¸öshellµÄhistory¼ÇÒäÖÐ
-			w £º½«Ä¿Ç°µÄhistory¼ÇÒäÄÚÈÝÐ´ÈëhistfilesÖÐ
+			a ï¼šå°†ç›®å‰æ–°å¢žçš„historyæŒ‡ä»¤æ–°å¢žå…¥hisfilesä¸­,è‹¥æ²¡åŠ åˆ™é¢„è®¾å†™å…¥~/.bash_history
+			r : å°†histfilesçš„å†…å®¹è¯»åˆ°ç›®å‰è¿™ä¸ªshellçš„historyè®°å¿†ä¸­
+			w ï¼šå°†ç›®å‰çš„historyè®°å¿†å†…å®¹å†™å…¥histfilesä¸­
 			
-	£¡number £ºÖ´ÐÐµÚ¼¸±ÊÖ¸Áî(ÀúÊ·ÖÐ)
-	£¡command £ºÓÉ×î½üÖ¸ÁîÏòÇ°ËÑË÷ÒÔcommand¿ªÍ·µÄÖ¸Áî²¢Ö´ÐÐ
-	£¡£¡£ºÖ´ÐÐÉÏÒ»¸öÖ¸Áî
+	ï¼number ï¼šæ‰§è¡Œç¬¬å‡ ç¬”æŒ‡ä»¤(åŽ†å²ä¸­)
+	ï¼command ï¼šç”±æœ€è¿‘æŒ‡ä»¤å‘å‰æœç´¢ä»¥commandå¼€å¤´çš„æŒ‡ä»¤å¹¶æ‰§è¡Œ
+	ï¼ï¼ï¼šæ‰§è¡Œä¸Šä¸€ä¸ªæŒ‡ä»¤
 	
 	
-	Ö¸ÁîµÄÔË×÷Ë³Ðò£º
-		1. ÒÔÏà¶Ô/¾ø¶ÔÂ·¾¶Ö´ÐÐÖ¸Áî£¬ÀýÈç¡º /bin/ls ¡»»ò¡º ./ls ¡»
-		2. ÓÉ alias ÕÒµ½¸ÃÖ¸ÁîÀ´Ö´ÐÐ
-		3. ÓÉ bash ÄÚ½¨µÄ (builtin) Ö¸ÁîÀ´Ö´ÐÐ
-		4. Í¸¹ý $PATH Õâ¸ö±äÁ¿µÄË³ÐòËÑÑ°µ½µÄµÚÒ»¸öÖ¸ÁîÀ´Ö´ÐÐ
+	æŒ‡ä»¤çš„è¿ä½œé¡ºåºï¼š
+		1. ä»¥ç›¸å¯¹/ç»å¯¹è·¯å¾„æ‰§è¡ŒæŒ‡ä»¤ï¼Œä¾‹å¦‚ã€Ž /bin/ls ã€æˆ–ã€Ž ./ls ã€
+		2. ç”± alias æ‰¾åˆ°è¯¥æŒ‡ä»¤æ¥æ‰§è¡Œ
+		3. ç”± bash å†…å»ºçš„ (builtin) æŒ‡ä»¤æ¥æ‰§è¡Œ
+		4. é€è¿‡ $PATH è¿™ä¸ªå˜é‡çš„é¡ºåºæœå¯»åˆ°çš„ç¬¬ä¸€ä¸ªæŒ‡ä»¤æ¥æ‰§è¡Œ
 	
 	
-	type -a ls --- ²éÑ¯Ö¸ÁîlsµÄËÑÑ°Ë³Ðò
+	type -a ls --- æŸ¥è¯¢æŒ‡ä»¤lsçš„æœå¯»é¡ºåº
 	
-	/etc/issue --- ½øÕ¾»­Ãæ»¶Ó­×Ö·û´®Ð´ÈëÎÄ¼þ,¿É×Ô¼ºÐÞ¸Ä
-	/etc/issue.net --- Ìá¹©¸øtelnetÔ¶³ÌµÇÂ¼³ÌÐòÊ¹ÓÃ,Ê¹ÓÃtelnetµÇÂ¼µ½Ö÷»ú»áÏÔÊ¾´ËÎÄ¼þÄÚÈÝ
-	/etc/motd --- Ð´ÈëÒ»Ð©ÈÃÊ¹ÓÃÕßµÇÈëºóÈ¡µÃÒ»Ð©ÐÅÏ¢(rootÉí·ÝÐ´Èë)
-	
-	
-	×Ô¶¨Òå±ðÃû¡¢×Ô¶¨Òå±äÁ¿ÔÚ×¢Ïúbashºó¾ÍÊ§Ð§
+	/etc/issue --- è¿›ç«™ç”»é¢æ¬¢è¿Žå­—ç¬¦ä¸²å†™å…¥æ–‡ä»¶,å¯è‡ªå·±ä¿®æ”¹
+	/etc/issue.net --- æä¾›ç»™telnetè¿œç¨‹ç™»å½•ç¨‹åºä½¿ç”¨,ä½¿ç”¨telnetç™»å½•åˆ°ä¸»æœºä¼šæ˜¾ç¤ºæ­¤æ–‡ä»¶å†…å®¹
+	/etc/motd --- å†™å…¥ä¸€äº›è®©ä½¿ç”¨è€…ç™»å…¥åŽå–å¾—ä¸€äº›ä¿¡æ¯(rootèº«ä»½å†™å…¥)
 	
 	
-bashµÄ»·¾³ÅäÖÃÎÄ¼þ£º
+	è‡ªå®šä¹‰åˆ«åã€è‡ªå®šä¹‰å˜é‡åœ¨æ³¨é”€bashåŽå°±å¤±æ•ˆ
+	
+	
+bashçš„çŽ¯å¢ƒé…ç½®æ–‡ä»¶ï¼š
 
-	login shell£ºÈ¡µÃ bash Ê±ÐèÒªÍêÕûµÄµÇÈëÁ÷³ÌµÄ,¾Í³ÆÎª login shell
-		¾ÙÀýÀ´Ëµ:
-			ÄãÒªÓÉ tty1 ~ tty6 µÇÈë,ÐèÒªÊäÈëÓÃ»§µÄÕËºÅÓëÃÜÂë,´ËÊ±È¡µÃµÄ bash ¾Í³ÆÎªlogin shell
+	login shellï¼šå–å¾— bash æ—¶éœ€è¦å®Œæ•´çš„ç™»å…¥æµç¨‹çš„,å°±ç§°ä¸º login shell
+		ä¸¾ä¾‹æ¥è¯´:
+			ä½ è¦ç”± tty1 ~ tty6 ç™»å…¥,éœ€è¦è¾“å…¥ç”¨æˆ·çš„è´¦å·ä¸Žå¯†ç ,æ­¤æ—¶å–å¾—çš„ bash å°±ç§°ä¸ºlogin shell
 	
-		¶ÁÈ¡µÄÅäÖÃÎÄ¼þ£º
-			1. /etc/profile£ºÕâÊÇÏµÍ³ÕûÌåµÄÉè¶¨,Äã×îºÃ²»ÒªÐÞ¸ÄÕâ¸öÎÄ¼þ
-			2. ~/.bash_profile »ò ~/.bash_login »ò ~/.profile£ºÊôÓÚÊ¹ÓÃÕß¸öÈËÉè¶¨,ÄãÒª¸Ä×Ô¼ºµÄÊý¾Ý,¾ÍÐ´ÈëÕâÀï		
+		è¯»å–çš„é…ç½®æ–‡ä»¶ï¼š
+			1. /etc/profileï¼šè¿™æ˜¯ç³»ç»Ÿæ•´ä½“çš„è®¾å®š,ä½ æœ€å¥½ä¸è¦ä¿®æ”¹è¿™ä¸ªæ–‡ä»¶
+			2. ~/.bash_profile æˆ– ~/.bash_login æˆ– ~/.profileï¼šå±žäºŽä½¿ç”¨è€…ä¸ªäººè®¾å®š,ä½ è¦æ”¹è‡ªå·±çš„æ•°æ®,å°±å†™å…¥è¿™é‡Œ		
 			
-				/etc/profile(login shell²Å»á¶Á)£º
+				/etc/profile(login shellæ‰ä¼šè¯»)ï¼š
 				
-					Éè¶¨µÄ±äÁ¿£º
-						PATH£º»áÒÀ¾Ý UID ¾ö¶¨ PATH ±äÁ¿Òª²»Òªº¬ÓÐ sbin µÄÏµÍ³Ö¸ÁîÄ¿Â¼
-						MAIL£ºÒÀ¾ÝÕËºÅÉè¶¨ºÃÊ¹ÓÃÕßµÄ mailbox µ½ /var/spool/mail/ÕËºÅÃû
-						USER£º¸ù¾ÝÓÃ»§µÄÕËºÅÉè¶¨´ËÒ»±äÁ¿ÄÚÈÝ
-						HOSTNAME£ºÒÀ¾ÝÖ÷»úµÄ hostname Ö¸Áî¾ö¶¨´ËÒ»±äÁ¿ÄÚÈÝ
-						HISTSIZE£ºÀúÊ·ÃüÁî¼ÇÂ¼±ÊÊý¡£CentOS 7.x Éè¶¨Îª 1000 
-						umask£º°üÀ¨ root Ä¬ÈÏÎª 022 ¶øÒ»°ãÓÃ»§Îª 002 µÈ
+					è®¾å®šçš„å˜é‡ï¼š
+						PATHï¼šä¼šä¾æ® UID å†³å®š PATH å˜é‡è¦ä¸è¦å«æœ‰ sbin çš„ç³»ç»ŸæŒ‡ä»¤ç›®å½•
+						MAILï¼šä¾æ®è´¦å·è®¾å®šå¥½ä½¿ç”¨è€…çš„ mailbox åˆ° /var/spool/mail/è´¦å·å
+						USERï¼šæ ¹æ®ç”¨æˆ·çš„è´¦å·è®¾å®šæ­¤ä¸€å˜é‡å†…å®¹
+						HOSTNAMEï¼šä¾æ®ä¸»æœºçš„ hostname æŒ‡ä»¤å†³å®šæ­¤ä¸€å˜é‡å†…å®¹
+						HISTSIZEï¼šåŽ†å²å‘½ä»¤è®°å½•ç¬”æ•°ã€‚CentOS 7.x è®¾å®šä¸º 1000 
+						umaskï¼šåŒ…æ‹¬ root é»˜è®¤ä¸º 022 è€Œä¸€èˆ¬ç”¨æˆ·ä¸º 002 ç­‰
 						
-					ºô½ÐÍâ²¿Éè¶¨Êý¾Ý£º
-						/etc/profile.d/*.sh £º (Ê¹ÓÃÕßÐèÒª¾ßÓÐ¸ÃÎÄ¼þrÈ¨ÏÞ)¹æ·¶bash²Ù×÷½Ó¿ÚµÄÑÕÉ«¡¢ÓïÏµ¡¢llÓëlsÖ¸Áî±ðÃû¡¢vi±ðÃû¡¢which±ðÃûµÈ,¿ÉÓÃÓÚÉè¶¨¹²Ïí±ðÃû(½¨Á¢.shÎÄ¼þ)
-						/etc/locale.conf £ºÅäÖÃbashÔ¤ÉèÊ¹ÓÃºÎÖÖÓïÏµ
-						/usr/share/bash-completion/completions/* £º ÃüÁî²¹Æë¡¢µµÃû²¹Æë¡¢Ö¸ÁîÑ¡Ïî²ÎÊý²¹ÆëµÈÖ¸Áî,ÓÉ/etc/profile.d/bash_completion.sh Õâ¸öÎÄ¼þÔØÈë
+					å‘¼å«å¤–éƒ¨è®¾å®šæ•°æ®ï¼š
+						/etc/profile.d/*.sh ï¼š (ä½¿ç”¨è€…éœ€è¦å…·æœ‰è¯¥æ–‡ä»¶ræƒé™)è§„èŒƒbashæ“ä½œæŽ¥å£çš„é¢œè‰²ã€è¯­ç³»ã€llä¸ŽlsæŒ‡ä»¤åˆ«åã€viåˆ«åã€whichåˆ«åç­‰,å¯ç”¨äºŽè®¾å®šå…±äº«åˆ«å(å»ºç«‹.shæ–‡ä»¶)
+						/etc/locale.conf ï¼šé…ç½®bashé¢„è®¾ä½¿ç”¨ä½•ç§è¯­ç³»
+						/usr/share/bash-completion/completions/* ï¼š å‘½ä»¤è¡¥é½ã€æ¡£åè¡¥é½ã€æŒ‡ä»¤é€‰é¡¹å‚æ•°è¡¥é½ç­‰æŒ‡ä»¤,ç”±/etc/profile.d/bash_completion.sh è¿™ä¸ªæ–‡ä»¶è½½å…¥
 				
-					--- bash µÄ login shell Çé¿öÏÂËù¶ÁÈ¡µÄÕûÌå»·¾³ÅäÖÃÎÄ¼þÆäÊµÖ»ÓÐ /etc/profile,µ«ÊÇ/etc/profile »¹»áºô½Ð³öÆäËûµÄÅäÖÃÎÄ¼þ
+					--- bash çš„ login shell æƒ…å†µä¸‹æ‰€è¯»å–çš„æ•´ä½“çŽ¯å¢ƒé…ç½®æ–‡ä»¶å…¶å®žåªæœ‰ /etc/profile,ä½†æ˜¯/etc/profile è¿˜ä¼šå‘¼å«å‡ºå…¶ä»–çš„é…ç½®æ–‡ä»¶
 				
 				
-				~/.bash_profile (login shell ²Å»á¶Á)£º(Ê¹ÓÃÕß¸öÈËÅäÖÃÎÄ¼þ)(Éè¶¨PATHÕâ¸ö±äÁ¿²¢×ª³É»·¾³±äÁ¿)
-					ÒÀÕÕË³Ðò¶ÁÈ¡ÏÂÃæÖÐµÄÄ³Ò»¸ö£º
+				~/.bash_profile (login shell æ‰ä¼šè¯»)ï¼š(ä½¿ç”¨è€…ä¸ªäººé…ç½®æ–‡ä»¶)(è®¾å®šPATHè¿™ä¸ªå˜é‡å¹¶è½¬æˆçŽ¯å¢ƒå˜é‡)
+					ä¾ç…§é¡ºåºè¯»å–ä¸‹é¢ä¸­çš„æŸä¸€ä¸ªï¼š
 						1. ~/.bash_profile
 						2. ~/.bash_login
 						3. ~/.profile
 				
 				
-				source ÅäÖÃÎÄ¼þµµÃû
-				source ~/.bashrc == . ~/.bashrc  ½«Ä¿Â¼ÄÚµÄÉè¶¨¶ÁÈ¡µ½Ä¿Ç°µÄbash»·¾³ÖÐ
+				source é…ç½®æ–‡ä»¶æ¡£å
+				source ~/.bashrc == . ~/.bashrc  å°†ç›®å½•å†…çš„è®¾å®šè¯»å–åˆ°ç›®å‰çš„bashçŽ¯å¢ƒä¸­
 				
 	
-	non-login shell£ºÈ¡µÃ bash ½Ó¿ÚµÄ·½·¨²»ÐèÒªÖØ¸´µÇÈëµÄ¾Ù¶¯
-		¾ÙÀýÀ´Ëµ:
-			(1)ÄãÒÔ X window µÇÈë Linux ºó,ÔÙÒÔ X µÄÍ¼ÐÎ»¯½Ó¿ÚÆô¶¯ÖÕ¶Ë»ú,´ËÊ±ÄÇ¸öÖÕ¶Ë½Ó¿Ú²¢Ã»ÓÐÐèÒªÔÙ´ÎµÄÊäÈëÕËºÅÓëÃÜÂë,ÄÇ¸ö bash µÄ»·¾³¾Í³ÆÎª non-login shell ÁË
-			(2)ÄãÔÚÔ­±¾µÄ bash »·¾³ÏÂÔÙ´ÎÏÂ´ï bash Õâ¸öÖ¸Áî,Í¬ÑùµÄÒ²Ã»ÓÐÊäÈëÕËºÅÃÜÂë,ÄÇµÚ¶þ¸ö bash (×Ó³ÌÐò) Ò²ÊÇ non-login shell 
+	non-login shellï¼šå–å¾— bash æŽ¥å£çš„æ–¹æ³•ä¸éœ€è¦é‡å¤ç™»å…¥çš„ä¸¾åŠ¨
+		ä¸¾ä¾‹æ¥è¯´:
+			(1)ä½ ä»¥ X window ç™»å…¥ Linux åŽ,å†ä»¥ X çš„å›¾å½¢åŒ–æŽ¥å£å¯åŠ¨ç»ˆç«¯æœº,æ­¤æ—¶é‚£ä¸ªç»ˆç«¯æŽ¥å£å¹¶æ²¡æœ‰éœ€è¦å†æ¬¡çš„è¾“å…¥è´¦å·ä¸Žå¯†ç ,é‚£ä¸ª bash çš„çŽ¯å¢ƒå°±ç§°ä¸º non-login shell äº†
+			(2)ä½ åœ¨åŽŸæœ¬çš„ bash çŽ¯å¢ƒä¸‹å†æ¬¡ä¸‹è¾¾ bash è¿™ä¸ªæŒ‡ä»¤,åŒæ ·çš„ä¹Ÿæ²¡æœ‰è¾“å…¥è´¦å·å¯†ç ,é‚£ç¬¬äºŒä¸ª bash (å­ç¨‹åº) ä¹Ÿæ˜¯ non-login shell 
 	
 	
-		¶ÁÈ¡µÄÅäÖÃÎÄ¼þ£º
-			~/.bashrc(non-login shell»á¶Á)
+		è¯»å–çš„é…ç½®æ–‡ä»¶ï¼š
+			~/.bashrc(non-login shellä¼šè¯»)
 			
-			centos7.X»áÖ÷¶¯ºô½Ð/etc/bashrcÎÄ¼þ,¶¨ÒåÒ»ÏÂÊý¾Ý£º
-				ÒÀ¾Ý²»Í¬µÄ UID ¹æ·¶³ö umask µÄÖµ
-				ÒÀ¾Ý²»Í¬µÄ UID ¹æ·¶³öÌáÊ¾×Ö·û (¾ÍÊÇ PS1 ±äÁ¿)
-				ºô½Ð /etc/profile.d/*.sh µÄÉè¶¨
+			centos7.Xä¼šä¸»åŠ¨å‘¼å«/etc/bashrcæ–‡ä»¶,å®šä¹‰ä¸€ä¸‹æ•°æ®ï¼š
+				ä¾æ®ä¸åŒçš„ UID è§„èŒƒå‡º umask çš„å€¼
+				ä¾æ®ä¸åŒçš„ UID è§„èŒƒå‡ºæç¤ºå­—ç¬¦ (å°±æ˜¯ PS1 å˜é‡)
+				å‘¼å« /etc/profile.d/*.sh çš„è®¾å®š
 	
 	
-	ÆäËûÏà¹ØÅäÖÃÎÄ¼þ£º
-		/etc/man_db.conf £ºÏÂ´ïmanÖ¸ÁîÊ±²é¿´Êý¾ÝÂ·¾¶
-		~/.bash_history £ºÀúÊ·ÃüÁî¼ÇÂ¼ÎÄ¼þ
-		~/.bash_logout : µ±ÎÒ×¢Ïú bash ºó,ÏµÍ³ÔÙ°ïÎÒ×öÍêÊ²Ã´¶¯×÷ºó²ÅÀë¿ª
+	å…¶ä»–ç›¸å…³é…ç½®æ–‡ä»¶ï¼š
+		/etc/man_db.conf ï¼šä¸‹è¾¾manæŒ‡ä»¤æ—¶æŸ¥çœ‹æ•°æ®è·¯å¾„
+		~/.bash_history ï¼šåŽ†å²å‘½ä»¤è®°å½•æ–‡ä»¶
+		~/.bash_logout : å½“æˆ‘æ³¨é”€ bash åŽ,ç³»ç»Ÿå†å¸®æˆ‘åšå®Œä»€ä¹ˆåŠ¨ä½œåŽæ‰ç¦»å¼€
 		
 	
-	stty¡¢set £º ÖÕ¶Ë»úµÄ»·¾³Éè¶¨
+	sttyã€set ï¼š ç»ˆç«¯æœºçš„çŽ¯å¢ƒè®¾å®š
 	
-	stty -a --- ÏÔÊ¾ËùÓÐstty²ÎÊý
-		intr : ËÍ³öÒ»¸ö interrupt (ÖÐ¶Ï) µÄÑ¶ºÅ¸øÄ¿Ç°ÕýÔÚ run µÄ³ÌÐò (¾ÍÊÇÖÕÖ¹†ª£¡)
-		quit : ËÍ³öÒ»¸ö quit µÄÑ¶ºÅ¸øÄ¿Ç°ÕýÔÚ run µÄ³ÌÐò
-		erase : ÏòºóÉ¾³ý×Ö·û
-		kill : É¾³ýÔÚÄ¿Ç°Ö¸ÁîÁÐÉÏµÄËùÓÐÎÄ×Ö
-		eof : End of file µÄÒâË¼,´ú±í½áÊøÊäÈë
-		start : ÔÚÄ³¸ö³ÌÐòÍ£Ö¹ºó,ÖØÐÂÆô¶¯ËûµÄ output
-		stop : Í£Ö¹Ä¿Ç°ÆÁÄ»µÄÊä³ö
-		susp : ËÍ³öÒ»¸ö terminal stop µÄÑ¶ºÅ¸øÕýÔÚ run µÄ³ÌÐò
+	stty -a --- æ˜¾ç¤ºæ‰€æœ‰sttyå‚æ•°
+		intr : é€å‡ºä¸€ä¸ª interrupt (ä¸­æ–­) çš„è®¯å·ç»™ç›®å‰æ­£åœ¨ run çš„ç¨‹åº (å°±æ˜¯ç»ˆæ­¢å•°ï¼)
+		quit : é€å‡ºä¸€ä¸ª quit çš„è®¯å·ç»™ç›®å‰æ­£åœ¨ run çš„ç¨‹åº
+		erase : å‘åŽåˆ é™¤å­—ç¬¦
+		kill : åˆ é™¤åœ¨ç›®å‰æŒ‡ä»¤åˆ—ä¸Šçš„æ‰€æœ‰æ–‡å­—
+		eof : End of file çš„æ„æ€,ä»£è¡¨ç»“æŸè¾“å…¥
+		start : åœ¨æŸä¸ªç¨‹åºåœæ­¢åŽ,é‡æ–°å¯åŠ¨ä»–çš„ output
+		stop : åœæ­¢ç›®å‰å±å¹•çš„è¾“å‡º
+		susp : é€å‡ºä¸€ä¸ª terminal stop çš„è®¯å·ç»™æ­£åœ¨ run çš„ç¨‹åº
 		
 	
-	stdOut > >> : 1> 1>> ÕýÈ·Êä³ö  2> 2>> ´íÎóÊä³ö  >>(ÀÛ¼ÓµÄ·½Ê½) >(¸²¸ÇµÄ·½Ê½)
+	stdOut > >> : 1> 1>> æ­£ç¡®è¾“å‡º  2> 2>> é”™è¯¯è¾“å‡º  >>(ç´¯åŠ çš„æ–¹å¼) >(è¦†ç›–çš„æ–¹å¼)
 	stdIn < <<
 	
 	
-	cmd;cmd --- Á¬ÐøÏÂ´ïÖ¸Áî
-	$?(Ö¸Áî»Ø´«Öµ) Óë cmd && cmd1 (cmdÖ´ÐÐÕýÈ·²ÅÖ´ÐÐcmd1)Óë ||(cmdÖ´ÐÐÕýÈ·¾Í²»Ö´ÐÐcmd1)
+	cmd;cmd --- è¿žç»­ä¸‹è¾¾æŒ‡ä»¤
+	$?(æŒ‡ä»¤å›žä¼ å€¼) ä¸Ž cmd && cmd1 (cmdæ‰§è¡Œæ­£ç¡®æ‰æ‰§è¡Œcmd1)ä¸Ž ||(cmdæ‰§è¡Œæ­£ç¡®å°±ä¸æ‰§è¡Œcmd1)
 	
 	
-	| --- ¹ÜÏßÃüÁî
-		¹ÜÏßÃüÁî½ö»á´¦Àí standard output,¶ÔÓÚ standard error output »áÓèÒÔºöÂÔ
-		¹ÜÏßÃüÁî±ØÐëÒªÄÜ¹»½ÓÊÜÀ´×ÔÇ°Ò»¸öÖ¸ÁîµÄÊý¾Ý³ÉÎª standard input ¼ÌÐø´¦Àí²ÅÐÐ
+	| --- ç®¡çº¿å‘½ä»¤
+		ç®¡çº¿å‘½ä»¤ä»…ä¼šå¤„ç† standard output,å¯¹äºŽ standard error output ä¼šäºˆä»¥å¿½ç•¥
+		ç®¡çº¿å‘½ä»¤å¿…é¡»è¦èƒ½å¤ŸæŽ¥å—æ¥è‡ªå‰ä¸€ä¸ªæŒ‡ä»¤çš„æ•°æ®æˆä¸º standard input ç»§ç»­å¤„ç†æ‰è¡Œ
 	
 	
-		cut -d'·Ö¸î×Ö·û' -f fields
-		cut -c ×Ö·ûÇø¼ä
-			-d £ººóÃæ½Ó·Ö¸î×Ö·û,Óë-fÒ»ÆðÊ¹ÓÃ
-			-f £ºÒÀ¾Ý-dµÄ·Ö¸î×Ö·û½«Ò»¶ÎÑ¶Ï¢·Ö³ÉÊý¶Î,ÓÃ-fÈ¥³ýµÚ¼¸¶ÎµÄÒâË¼
-			-c £ºÒÔ×Ö·ûµÄµ¥Î»È¡³ö¹Ì¶¨×Ö·ûÇø¼ä
+		cut -d'åˆ†å‰²å­—ç¬¦' -f fields
+		cut -c å­—ç¬¦åŒºé—´
+			-d ï¼šåŽé¢æŽ¥åˆ†å‰²å­—ç¬¦,ä¸Ž-fä¸€èµ·ä½¿ç”¨
+			-f ï¼šä¾æ®-dçš„åˆ†å‰²å­—ç¬¦å°†ä¸€æ®µè®¯æ¯åˆ†æˆæ•°æ®µ,ç”¨-fåŽ»é™¤ç¬¬å‡ æ®µçš„æ„æ€
+			-c ï¼šä»¥å­—ç¬¦çš„å•ä½å–å‡ºå›ºå®šå­—ç¬¦åŒºé—´
 			
 		
-		grep [-acinv] [--color=auto] 'ËÑÑ°µÄ×Ö·û´®' filename --- ½ØÈ¡ÐÅÏ¢
-			-a £º½«binaryÎÄ¼þÒÔtextÎÄ¼þµÄ·½Ê½ËÑÑ°Êý¾Ý
-			-c £º¼ÆËãÕÒµ½'ËÑÑ°×Ö·û´®'µÄ´ÎÊý
-			-i £ººöÂÔ´óÐ¡Ð´µÄ²»Í¬
-			-n £ºÊä³öÐÐºÅ
-			-v £º·´ÏòÑ¡Ôñ,¼´ÏÔÊ¾³öÃ»ÓÐ°üº¬ËÑÑ°×Ö·û´®ÄÚÈÝÄÇÒ»ÐÐ
-			--color=auto £º½«ÕÒµ½µÄ¹Ø¼ü×Ö²¿·Ö¼ÓÉÏÑÕÉ«ÏÔÊ¾
+		grep [-acinv] [--color=auto] 'æœå¯»çš„å­—ç¬¦ä¸²' filename --- æˆªå–ä¿¡æ¯
+			-a ï¼šå°†binaryæ–‡ä»¶ä»¥textæ–‡ä»¶çš„æ–¹å¼æœå¯»æ•°æ®
+			-c ï¼šè®¡ç®—æ‰¾åˆ°'æœå¯»å­—ç¬¦ä¸²'çš„æ¬¡æ•°
+			-i ï¼šå¿½ç•¥å¤§å°å†™çš„ä¸åŒ
+			-n ï¼šè¾“å‡ºè¡Œå·
+			-v ï¼šåå‘é€‰æ‹©,å³æ˜¾ç¤ºå‡ºæ²¡æœ‰åŒ…å«æœå¯»å­—ç¬¦ä¸²å†…å®¹é‚£ä¸€è¡Œ
+			--color=auto ï¼šå°†æ‰¾åˆ°çš„å…³é”®å­—éƒ¨åˆ†åŠ ä¸Šé¢œè‰²æ˜¾ç¤º
 			
-		last --- ²éÑ¯ÏµÍ³ÉÏÃæÓÐµÇÂ½Ö÷»úÕßµÄÉí·Ý
+		last --- æŸ¥è¯¢ç³»ç»Ÿä¸Šé¢æœ‰ç™»é™†ä¸»æœºè€…çš„èº«ä»½
 		
-		sort [-fbMnrtuk] [file or stdin] --- ÅÅÐò
-			-f £ººöÂÔ´óÐ¡Ð´²îÒì
-			-b £ººöÂÔ×îÇ°¿Õ¸ñ
-			-M £ºÒÔÔÂ·ÝÃûÅÅÐò
-			-n £ºÒÔ´¿Êý×Ö½øÐÐÅÅÐò(Ä¬ÈÏÒÔÎÄ×ÖÐÎÌ¬)
-			-r £º·´ÏòÅÅÐò
-			-u £ºÏàÍ¬Êý¾Ý½ö³öÏÖÒ»ÐÐ´ú±í
-			-t £º·Ö¸ô·û,Ô¤ÉèÎªtab¼ü
-			-k £ºÒÔÄÄ¸öÇø¼äÀ´½øÐÐÅÅÐò
-		
-	
-		uniq [-ic] --- ÅÅÐòºóÖØ¸´×ÊÁÏ½öÏÔÊ¾Ò»¸ö
-			-i : ºöÂÔ´óÐ¡Ð´×Ö·ûµÄ²»Í¬
-			-c £º½øÐÐ¼ÆÊý
-	
-	
-		wc [-lwm] --- ¼ÆËãÊä³öµÄÑ¶Ï¢ÕûÌåÊý¾Ý
-			-l : ½öÁÐ³öÐÐ
-			-w £º½öÁÐ³ö¶àÉÙ×Ö
-			-m £º¶àÉÙ×Ö·û
-			
-	
-		tee [-a] file --- Ë«ÏòÖØµ¼Ïò
-			-a : ÒÔÀÛ¼ÓµÄ·½Ê½,½«Êý¾Ý¼Óµ½fileÖÐ
+		sort [-fbMnrtuk] [file or stdin] --- æŽ’åº
+			-f ï¼šå¿½ç•¥å¤§å°å†™å·®å¼‚
+			-b ï¼šå¿½ç•¥æœ€å‰ç©ºæ ¼
+			-M ï¼šä»¥æœˆä»½åæŽ’åº
+			-n ï¼šä»¥çº¯æ•°å­—è¿›è¡ŒæŽ’åº(é»˜è®¤ä»¥æ–‡å­—å½¢æ€)
+			-r ï¼šåå‘æŽ’åº
+			-u ï¼šç›¸åŒæ•°æ®ä»…å‡ºçŽ°ä¸€è¡Œä»£è¡¨
+			-t ï¼šåˆ†éš”ç¬¦,é¢„è®¾ä¸ºtabé”®
+			-k ï¼šä»¥å“ªä¸ªåŒºé—´æ¥è¿›è¡ŒæŽ’åº
 		
 	
-		tr [-ds] SET1 --- É¾³ýÒ»¶ÎÑ¶Ï¢µ±ÖÐµÄÎÄ×Ö,»òÕßÊÇ½øÐÐÎÄ×ÖÑ¶Ï¢µÄÌæ»»
-			-d : É¾³ýÑ¶Ï¢µ±ÖÐµÄSET1Õâ¸ö×Ö·û´®
-			-s : È¡´úÖØ¸´µÄ×Ö·û
+		uniq [-ic] --- æŽ’åºåŽé‡å¤èµ„æ–™ä»…æ˜¾ç¤ºä¸€ä¸ª
+			-i : å¿½ç•¥å¤§å°å†™å­—ç¬¦çš„ä¸åŒ
+			-c ï¼šè¿›è¡Œè®¡æ•°
+	
+	
+		wc [-lwm] --- è®¡ç®—è¾“å‡ºçš„è®¯æ¯æ•´ä½“æ•°æ®
+			-l : ä»…åˆ—å‡ºè¡Œ
+			-w ï¼šä»…åˆ—å‡ºå¤šå°‘å­—
+			-m ï¼šå¤šå°‘å­—ç¬¦
 			
-		col [-xb] --- -x ½«tab¼ü×ª»»³É¶ÔµÈµÄ¿Õ¸ñ¼ü
+	
+		tee [-a] file --- åŒå‘é‡å¯¼å‘
+			-a : ä»¥ç´¯åŠ çš„æ–¹å¼,å°†æ•°æ®åŠ åˆ°fileä¸­
+		
+	
+		tr [-ds] SET1 --- åˆ é™¤ä¸€æ®µè®¯æ¯å½“ä¸­çš„æ–‡å­—,æˆ–è€…æ˜¯è¿›è¡Œæ–‡å­—è®¯æ¯çš„æ›¿æ¢
+			-d : åˆ é™¤è®¯æ¯å½“ä¸­çš„SET1è¿™ä¸ªå­—ç¬¦ä¸²
+			-s : å–ä»£é‡å¤çš„å­—ç¬¦
+			
+		col [-xb] --- -x å°†tabé”®è½¬æ¢æˆå¯¹ç­‰çš„ç©ºæ ¼é”®
 		
 		
 		join [til2] file1 file2 ---
-			-t £ºjoinÄ¬ÈÏÒÔ¿Õ×Ö·û·Ö¸î,²¢ÇÒ±È¶Ô[µÚÒ»¸ö×Ö¶Î]Êý¾Ý
-				 Èç¹ûÁ½ÎÄ¼þÏàÍ¬,Ôò½«Á½±ÊÊý¾ÝÁª³ÉÒ»ÐÐ,ÇÒµÚÒ»¸ö×Ö¶Î·ÅÔÚµÚÒ»¸ö
-			-i £ººöÂÔ´óÐ¡Ð´²îÒì
-			-l £ºÕâ¸öÊÇÊý×Ö1,´ú±íµÚÒ»¸öÎÄ¼þÒªÓÃÄÄ¸ö×Ö¶ÎÀ´·ÖÎö
-			-2 £º´ú±íµÚ¶þ¸öÎÄ¼þÒªÓÃÄÇ¸ö×Ö¶ÎÀ´·ÖÎö
+			-t ï¼šjoiné»˜è®¤ä»¥ç©ºå­—ç¬¦åˆ†å‰²,å¹¶ä¸”æ¯”å¯¹[ç¬¬ä¸€ä¸ªå­—æ®µ]æ•°æ®
+				 å¦‚æžœä¸¤æ–‡ä»¶ç›¸åŒ,åˆ™å°†ä¸¤ç¬”æ•°æ®è”æˆä¸€è¡Œ,ä¸”ç¬¬ä¸€ä¸ªå­—æ®µæ”¾åœ¨ç¬¬ä¸€ä¸ª
+			-i ï¼šå¿½ç•¥å¤§å°å†™å·®å¼‚
+			-l ï¼šè¿™ä¸ªæ˜¯æ•°å­—1,ä»£è¡¨ç¬¬ä¸€ä¸ªæ–‡ä»¶è¦ç”¨å“ªä¸ªå­—æ®µæ¥åˆ†æž
+			-2 ï¼šä»£è¡¨ç¬¬äºŒä¸ªæ–‡ä»¶è¦ç”¨é‚£ä¸ªå­—æ®µæ¥åˆ†æž
 			
-			ÔÚÊ¹ÓÃ join Ö®Ç°ÄãËùÐèÒª´¦ÀíµÄÎÄ¼þÓ¦¸ÃÒªÊÂÏÈ¾­¹ýÅÅÐò (sort) ´¦Àí
+			åœ¨ä½¿ç”¨ join ä¹‹å‰ä½ æ‰€éœ€è¦å¤„ç†çš„æ–‡ä»¶åº”è¯¥è¦äº‹å…ˆç»è¿‡æŽ’åº (sort) å¤„ç†
 	
 	
-		paste [-d] file1 file2 --- Ö±½Ó½«Á½ÐÐÌùÔÚÒ»Æð,ÒÔ·Ö¸ô·û·Ö¸î
-			-d : ºóÃæ½Ó·Ö¸ô·û,Ô¤ÉèÒÔtab·Ö¸î
-			- £ºÈç¹ûfile²¿·ÖÐ´³É-,±íÊ¾À´×Ô±ê×¼ÊäÈëµÄ×ÊÁÏ
+		paste [-d] file1 file2 --- ç›´æŽ¥å°†ä¸¤è¡Œè´´åœ¨ä¸€èµ·,ä»¥åˆ†éš”ç¬¦åˆ†å‰²
+			-d : åŽé¢æŽ¥åˆ†éš”ç¬¦,é¢„è®¾ä»¥tabåˆ†å‰²
+			- ï¼šå¦‚æžœfileéƒ¨åˆ†å†™æˆ-,è¡¨ç¤ºæ¥è‡ªæ ‡å‡†è¾“å…¥çš„èµ„æ–™
 	
 	
-		expand [-t] file --- ½«tab×ª³É¿Õ¸ñ¼ü
-			-t £ººóÃæ½ÓÊý×Ö,Ò»°ãÒ»¸ötabÕ¼8¸ö¿Õ¸ñ,ÎÒÃÇ¿ÉÒÔ×Ô¶¨Òå
+		expand [-t] file --- å°†tabè½¬æˆç©ºæ ¼é”®
+			-t ï¼šåŽé¢æŽ¥æ•°å­—,ä¸€èˆ¬ä¸€ä¸ªtabå 8ä¸ªç©ºæ ¼,æˆ‘ä»¬å¯ä»¥è‡ªå®šä¹‰
 	
 	
 		split [-bl] file PREFIX
-			-b £ººóÃæ¿É½ÓÓû·ÖÇø³ÉµÄÎÄ¼þ´óÐ¡,¿É¼Óµ¥Î»,ÀýÈçb¡¢k¡¢mµÈ
-			-l £ºÒÔÐÐÊýÀ´½øÐÐ·ÖÇø
-			PREFIX £º´ú±íÇ°µ¼·ûµÄÒâË¼,¿ÉÒÔ×÷Îª·ÖÇøÎÄ¼þµÄÇ°µ¼ÎÄ×Ö
+			-b ï¼šåŽé¢å¯æŽ¥æ¬²åˆ†åŒºæˆçš„æ–‡ä»¶å¤§å°,å¯åŠ å•ä½,ä¾‹å¦‚bã€kã€mç­‰
+			-l ï¼šä»¥è¡Œæ•°æ¥è¿›è¡Œåˆ†åŒº
+			PREFIX ï¼šä»£è¡¨å‰å¯¼ç¬¦çš„æ„æ€,å¯ä»¥ä½œä¸ºåˆ†åŒºæ–‡ä»¶çš„å‰å¯¼æ–‡å­—
 		
 		
-		xargs [-0epn] command --- ²úÉúÄ³¸öÖ¸ÁîµÄ²ÎÊýµÄÒâË¼
-			-0 : ÊäÈëº¬ÓÐÌØÊâ×Ö·û¿É½«Æä»¹Ô­³ÉÒ»°ã×Ö·û
-			-e : EOF,·ÖÎöµ½´Ë×Ö·ûÊ±Í£Ö¹¹¤×÷
-			-p £º»áÑ¯ÎÊÊ¹ÓÃÕß
-			-n £ººóÃæ½Ó´ÎÊý,Ã¿´ÎcommandÖ´ÐÐÖ¸ÁîÊ±,ÒªÊ¹ÓÃ¼¸¸ö²ÎÊýµÄÒâË¼
+		xargs [-0epn] command --- äº§ç”ŸæŸä¸ªæŒ‡ä»¤çš„å‚æ•°çš„æ„æ€
+			-0 : è¾“å…¥å«æœ‰ç‰¹æ®Šå­—ç¬¦å¯å°†å…¶è¿˜åŽŸæˆä¸€èˆ¬å­—ç¬¦
+			-e : EOF,åˆ†æžåˆ°æ­¤å­—ç¬¦æ—¶åœæ­¢å·¥ä½œ
+			-p ï¼šä¼šè¯¢é—®ä½¿ç”¨è€…
+			-n ï¼šåŽé¢æŽ¥æ¬¡æ•°,æ¯æ¬¡commandæ‰§è¡ŒæŒ‡ä»¤æ—¶,è¦ä½¿ç”¨å‡ ä¸ªå‚æ•°çš„æ„æ€
 			
-			ºÜ¶àÖ¸ÁîÆäÊµ²¢²»Ö§³Ö¹ÜÏßÃüÁî,Òò´ËÎÒÃÇ¿ÉÒÔÍ¸¹ý xargs À´Ìá¹©¸ÃÖ¸ÁîÒýÓÃ standard input Ö®ÓÃ
+			å¾ˆå¤šæŒ‡ä»¤å…¶å®žå¹¶ä¸æ”¯æŒç®¡çº¿å‘½ä»¤,å› æ­¤æˆ‘ä»¬å¯ä»¥é€è¿‡ xargs æ¥æä¾›è¯¥æŒ‡ä»¤å¼•ç”¨ standard input ä¹‹ç”¨
 	
 	
-		¼õºÅ"-" --- ÔÚ¹ÜÏßÃüÁîµ±ÖÐ,³£³£»áÊ¹ÓÃµ½Ç°Ò»¸öÖ¸ÁîµÄ stdout ×÷ÎªÕâ´ÎµÄstdin,Ä³Ð©Ö¸ÁîÐèÒªÓÃµ½ÎÄ¼þÃû (ÀýÈç tar) À´½øÐÐ´¦ÀíÊ±,¸Ã stdin Óë stdout ¿ÉÒÔÀûÓÃ¼õºÅ "-"À´Ìæ´ú
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		å‡å·"-" --- åœ¨ç®¡çº¿å‘½ä»¤å½“ä¸­,å¸¸å¸¸ä¼šä½¿ç”¨åˆ°å‰ä¸€ä¸ªæŒ‡ä»¤çš„ stdout ä½œä¸ºè¿™æ¬¡çš„stdin,æŸäº›æŒ‡ä»¤éœ€è¦ç”¨åˆ°æ–‡ä»¶å (ä¾‹å¦‚ tar) æ¥è¿›è¡Œå¤„ç†æ—¶,è¯¥ stdin ä¸Ž stdout å¯ä»¥åˆ©ç”¨å‡å· "-"æ¥æ›¿ä»£
 	
 	
